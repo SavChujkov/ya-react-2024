@@ -1,0 +1,12 @@
+.burger_creator {
+    display: flex;
+    justify-content: space-between;
+}
+
+.first_section {
+    flex-grow: 4;
+}
+
+.second_section {
+    flex-grow: 6;
+}
