@@ -2,9 +2,9 @@
 import React from 'react'
 import { useState } from 'react'
 
-import BurgerConstructor from '../UI/BurgerConstructor/BurgerConstructor'
-import BurgerIngredients from '../UI/BurgerIngredients/BurgerIngredients'
-import AppHeader from '../UI/Header/AppHeader'
+import BurgerConstructor from '../UI/burger-constructor/burger-constructor'
+import BurgerIngredients from '../UI/burger-ingredients/burger-ingredients'
+import AppHeader from '../UI/header/app-header'
 
 import mainpage from "./mainpage.module.css"
 

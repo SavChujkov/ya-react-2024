@@ -1,7 +1,9 @@
 import React from 'react'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import contructor_element from "./Constructor_Element.module.css"
+import contructor_element from "./constructor-element.module.css"
+import PropTypes from 'prop-types';
+
 
 export default function Constructor_Element({ ing_data, type }) {
 
@@ -19,12 +21,9 @@ export default function Constructor_Element({ ing_data, type }) {
         </div>
     )
 
-    return (
-        <ConstructorElement
-            text={ing_data.name}
-            price={ing_data.price}
-            thumbnail={ing_data.image}
-            type={type}
-        />
-    )
+}
+
+Constructor_Element.propTypes = {
+    ing_data: PropTypes.object,
+    type: PropTypes.string
 }
