@@ -2,9 +2,9 @@
 import React from 'react'
 import { useState } from 'react'
 
-import BurgerConstructor from '../UI/BurgerConstructor/BurgerConstructor'
-import BurgerIngredients from '../UI/BurgerIngredients/BurgerIngredients'
-import AppHeader from '../UI/Header/AppHeader'
+import BurgerConstructor from '../UI/burger-constructor/burger-constructor'
+import BurgerIngredients from '../UI/burger-ingredients/burger-ingredients'
+import AppHeader from '../UI/header-ingredients/app-header'
 
 import mainpage from "./mainpage.module.css"
 
@@ -230,12 +230,12 @@ export default function Mainpage() {
     return (
         <>
             <AppHeader />
-            <section className="container">
+            <main className="container">
                 <section className={mainpage.burger_creator}>
-                    <BurgerIngredients ingredients_list={ingredients} />
-                    <BurgerConstructor ingredients_list={ingredients} />
+                    <BurgerIngredients ingredientsList={ingredients} />
+                    <BurgerConstructor ingredientsList={ingredients} />
                 </section>
-            </section>
+            </main>
         </>
     )
 }
