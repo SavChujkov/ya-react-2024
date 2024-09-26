@@ -1,20 +1,20 @@
 import React from 'react'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import contructor_element from "./constructor-element.module.css"
+import dragElementModule from "./drag-element.module.css"
 import PropTypes from 'prop-types';
+import { IngredientType } from "../../../../utils/type"
 
-
-export default function Constructor_Element({ ing_data, type }) {
+export default function DragElement({ ingredientData, type }) {
 
     return (
-        <div className={contructor_element.flex_container}>
+        <div className={dragElementModule.flex_container}>
             {!type ? <DragIcon /> : null}
             <div style={{ width: "500px" }}>
                 <ConstructorElement
-                    text={ing_data.name}
-                    price={ing_data.price}
-                    thumbnail={ing_data.image}
+                    text={ingredientData.name}
+                    price={ingredientData.price}
+                    thumbnail={ingredientData.image}
                     type={type}
                 />
             </div>
@@ -23,7 +23,7 @@ export default function Constructor_Element({ ing_data, type }) {
 
 }
 
-Constructor_Element.propTypes = {
-    ing_data: PropTypes.object,
+DragElement.propTypes = {
+    ingredientData: IngredientType.isRequired,
     type: PropTypes.string
 }

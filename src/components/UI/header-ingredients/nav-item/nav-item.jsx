@@ -14,6 +14,6 @@ export default function NavItem({ Icon, text }) {
 }
 
 NavItem.propTypes = {
-    Icon: PropTypes.element,
-    text: PropTypes.string
+    Icon: PropTypes.func.isRequired,
+    text: PropTypes.string.isRequired
 }

@@ -1,19 +1,19 @@
-import React from 'react'
-import Constructor_Element from '../constructor-element/constructor-element'
-import ingredientlist from "./ingredient-list.module.css"
+import DragElement from '../constructor-element/constructor-element'
+import ingredientlistModule from "./ingredient-list.module.css"
 import PropTypes from 'prop-types';
+import { IngredientType } from "../../../../utils/type"
 
-export default function IngredientList({ ingredients_list }) {
+export default function IngredientList({ ingredientsList }) {
     return (
         <div
-            className={ingredientlist.ingredients_list}>
+            className={ingredientlistModule.ingredients_list}>
             {
-                ingredients_list.map(function (item, index) {
-                    let element_type
-                    element_type = index == 0 ? "top"
-                        : index == ingredients_list.length - 1 ? "bottom"
+                ingredientsList.map(function (item, index) {
+                    let elementType
+                    elementType = index == 0 ? "top"
+                        : index == ingredientsList.length - 1 ? "bottom"
                             : undefined
-                    return <Constructor_Element ing_data={item} type={element_type} />
+                    return <DragElement ingredientData={item} type={elementType} />
                 })
             }
         </div>
@@ -21,5 +21,5 @@ export default function IngredientList({ ingredients_list }) {
 }
 
 IngredientList.propTypes = {
-    ingredients_list: PropTypes.array
+    ingredientsList: PropTypes.arrayOf(IngredientType).isRequired
 }

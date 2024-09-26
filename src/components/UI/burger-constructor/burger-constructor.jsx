@@ -1,19 +1,20 @@
 import React from 'react'
-import burgerConstructor from "./burger-constructor.module.css"
+import burgerConstructorModule from "./burger-constructor.module.css"
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientList from './ingredient-list/ingredient-list'
 import PropTypes from 'prop-types';
+import { IngredientType } from "../../../utils/type"
 
-export default function BurgerConstructor({ ingredients_list }) {
+export default function BurgerConstructor({ ingredientsList }) {
     return (
-        <section className={burgerConstructor.section_block}>
+        <section className={burgerConstructorModule.section_block}>
 
-            <IngredientList ingredients_list={ingredients_list} />
+            <IngredientList ingredientsList={ingredientsList} />
 
             {/* когда будет функционал оформления заказа, можно вынести в компонент */}
-            <div className={burgerConstructor.make_order}>
-                <div className={burgerConstructor.price_summary}>
+            <div className={burgerConstructorModule.make_order}>
+                <div className={burgerConstructorModule.price_summary}>
                     <span className="text text_type_main-large">123</span>
                     <CurrencyIcon />
                 </div>
@@ -26,5 +27,5 @@ export default function BurgerConstructor({ ingredients_list }) {
 }
 
 BurgerConstructor.propTypes = {
-    ingredients_list: PropTypes.array
+    ingredientsList: PropTypes.arrayOf(IngredientType).isRequired
 }

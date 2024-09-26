@@ -1,15 +1,15 @@
-import React from 'react'
-import ingredientlist from "./ingredient-list.module.css"
+import ingredientListModule from "./ingredient-list.module.css"
 import Ingredient from '../ingredient/ingredient'
 import PropTypes from 'prop-types';
+import { IngredientType } from "../../../../utils/type"
 
-export default function IngredientList({ name, type, ingredients_list }) {
+export default function IngredientList({ name, type, ingredientsList }) {
     return (
-        <div className={ingredientlist.type_container}>
+        <div className={ingredientListModule.type_container}>
             <h2 className="text text_type_main-medium">{name}</h2>
-            <div className={ingredientlist.type}>
+            <div className={ingredientListModule.type}>
                 {
-                    ingredients_list.map(function (item) {
+                    ingredientsList.map(function (item) {
                         if (item.type === type) {
                             return <Ingredient ingredient={item} />
                         }
@@ -21,7 +21,7 @@ export default function IngredientList({ name, type, ingredients_list }) {
 }
 
 IngredientList.propTypes = {
-    name: PropTypes.string,
-    type: PropTypes.oneOf(['bun', 'sauce']),
-    ingredients_list: PropTypes.array,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(['bun', 'sauce']).isRequired,
+    ingredientsList: PropTypes.arrayOf(IngredientType).isRequired,
 }

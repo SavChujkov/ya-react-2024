@@ -230,12 +230,12 @@ export default function Mainpage() {
     return (
         <>
             <AppHeader />
-            <section className="container">
+            <main className="container">
                 <section className={mainpage.burger_creator}>
-                    <BurgerIngredients ingredients_list={ingredients} />
-                    <BurgerConstructor ingredients_list={ingredients} />
+                    <BurgerIngredients ingredientsList={ingredients} />
+                    <BurgerConstructor ingredientsList={ingredients} />
                 </section>
-            </section>
+            </main>
         </>
     )
 }
