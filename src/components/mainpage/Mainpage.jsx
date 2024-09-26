@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import BurgerConstructor from '../UI/burger-constructor/burger-constructor'
 import BurgerIngredients from '../UI/burger-ingredients/burger-ingredients'
-import AppHeader from '../UI/header/app-header'
+import AppHeader from '../UI/header-ingredients/app-header'
 
 import mainpage from "./mainpage.module.css"
 
