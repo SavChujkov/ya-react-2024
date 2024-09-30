@@ -1,0 +1,12 @@
+.modal {
+    background-color: #1C1C21;
+    width: 720px;
+    display: flex;
+    justify-content: center;
+    border-radius: 5%;
+
+}
+
+.modal:focus {
+    outline: none;
+}

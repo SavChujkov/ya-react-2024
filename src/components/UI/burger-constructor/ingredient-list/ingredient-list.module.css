@@ -1,13 +1,21 @@
-.ingredients_list {
+.flex_container {
     display: flex;
     align-items: center;
     align-items: start;
     flex-direction: column;
     align-items: end;
+
+
+}
+
+.ingredients_list {
+    composes: flex_container;
     gap: 16px;
-
-    margin: 0px 0px 40px 16px;
-
-    height: 570px;
     overflow-y: scroll;
+    margin: 16px 0px 16px 0px;
+}
+
+.ingredients_container {
+    composes: flex_container;
+    height: 680px;
 }

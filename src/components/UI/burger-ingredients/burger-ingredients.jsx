@@ -5,7 +5,7 @@ import IngredientList from './ingredient-list/ingredient-list';
 import PropTypes from 'prop-types';
 import { IngredientType } from "../../../utils/type"
 
-export default function BurgerIngredients({ ingredientsList }) {
+export default function BurgerIngredients({ ingredientsList, isError, isLoading }) {
     return (
         <section className={burgerIngredientsModule.section_block}>
             <h1 className={classNames(burgerIngredientsModule.header,
@@ -18,14 +18,23 @@ export default function BurgerIngredients({ ingredientsList }) {
                 <Tab>Соусы</Tab>
                 <Tab>Начинки</Tab>
             </div>
-            <div className={burgerIngredientsModule.type_list}>
-                <IngredientList name="Булки" type={"bun"} ingredientsList={ingredientsList} />
-                <IngredientList name="Соусы" type={"sauce"} ingredientsList={ingredientsList} />
-            </div>
+            {
+                isLoading ? (<p>Красивая анимация загрузки</p>) :
+                    isError ? (<p>Красивая анимация ошибки</p>) :
+                        (
+                            <div className={burgerIngredientsModule.type_list}>
+                                <IngredientList name="Булки" type={"bun"} ingredientsList={ingredientsList} />
+                                <IngredientList name="Соусы" type={"sauce"} ingredientsList={ingredientsList} />
+                            </div>
+                        )
+            }
+
         </section >
     )
 }
 
 BurgerIngredients.propTypes = {
-    ingredientsList: PropTypes.arrayOf(IngredientType).isRequired
+    ingredientsList: PropTypes.arrayOf(IngredientType).isRequired,
+    isError: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired,
 }

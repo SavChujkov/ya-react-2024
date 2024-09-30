@@ -11,7 +11,7 @@ export default function IngredientList({ name, type, ingredientsList }) {
                 {
                     ingredientsList.map(function (item) {
                         if (item.type === type) {
-                            return <Ingredient ingredient={item} />
+                            return <Ingredient ingredient={item} key={item._id} />
                         }
                     })
                 }
