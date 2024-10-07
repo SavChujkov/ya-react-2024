@@ -3,9 +3,8 @@ import DragElement from '../constructor-element/constructor-element'
 import ingredientlistModule from "./ingredient-list.module.css"
 import PropTypes from 'prop-types';
 import { IngredientType } from "../../../../utils/type"
-import OrderForm from '../forming-order/forming-order';
 import IngredientDetails from '../../modals/ingredient-details/ingredient-details';
-import ModalOverlay from '../../modals/modals-templates/modal-overlay/modal-overlay';
+import Modal from '../../modals/modals-templates/modal/modal';
 export default function IngredientList({ ingredientsList }) {
 
     const [selectedData, setSeletedData] = React.useState(null)
@@ -49,9 +48,9 @@ export default function IngredientList({ ingredientsList }) {
                     })
                 }
                 {showModal ?
-                    <ModalOverlay toggleDisplay={displayIngredientSummary}>
+                    <Modal modalHead="Детали ингредиента" toggleDisplay={displayIngredientSummary}>
                         <IngredientDetails toggleDisplay={displayIngredientSummary} ingredientData={selectedData} />
-                    </ModalOverlay>
+                    </Modal>
                     : null
                 }
             </div>

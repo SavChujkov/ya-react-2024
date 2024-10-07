@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import ModalOverlay from '../../modals/modals-templates/modal-overlay/modal-overlay'
 import OrderDetails from '../../modals/order-details/order-details'
+import Modal from '../../modals/modals-templates/modal/modal'
 
 export default function FormOrder() {
 
@@ -23,9 +23,9 @@ export default function FormOrder() {
                 Оформить заказ
             </Button>
             {showModal ?
-                <ModalOverlay toggleDisplay={displayOrderSummary}>
+                <Modal toggleDisplay={displayOrderSummary}>
                     <OrderDetails toggleDisplay={displayOrderSummary} orderId={orderId} />
-                </ModalOverlay>
+                </Modal>
                 : null
             }
         </>

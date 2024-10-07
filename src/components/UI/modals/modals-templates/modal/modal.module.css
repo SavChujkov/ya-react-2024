@@ -2,11 +2,29 @@
     background-color: #1C1C21;
     width: 720px;
     display: flex;
-    justify-content: center;
     border-radius: 5%;
-
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .modal:focus {
     outline: none;
+}
+
+.close_icon {
+    cursor: pointer;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.heading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 80%;
+    align-items: end;
+    justify-content: space-between;
+    margin-top: 40px;
+
 }

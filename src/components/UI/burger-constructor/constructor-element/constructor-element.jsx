@@ -16,9 +16,13 @@ export default function DragElement({ ingredientData, type, setSelectedData, tog
     return (
         <div className={type == "main" ? dragElementModule.drag_element : dragElementModule.closing_element}>
             {type == "main" ? <DragIcon /> : null}
-            <div onClick={selectDragElement} style={{ width: "500px" }}>
+            <div onClick={selectDragElement} style={{ width: "550px" }}>
                 <ConstructorElement
-                    text={ingredientData.name}
+                    text={type == "main" ? ingredientData.name :
+                        type == "top" ? `${ingredientData.name}\n(верх)` :
+                            type == "bottom" ? `${ingredientData.name}\n(низ)` :
+                                ingredientData.name
+                    }
                     price={ingredientData.price}
                     thumbnail={ingredientData.image}
                     type={type}

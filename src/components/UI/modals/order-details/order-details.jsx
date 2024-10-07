@@ -1,17 +1,11 @@
 import React from 'react'
 import orderDetailsModule from './order-details.module.css'
 import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from 'prop-types';
 
 export default function OrderDetails({ toggleDisplay, orderId }) {
     return (
         <div className={orderDetailsModule.order_details}>
-            <div className={orderDetailsModule.close_modal}>
-                <span className={orderDetailsModule.close_icon}>
-                    <CloseIcon onClick={toggleDisplay} />
-                </span>
-            </div>
             <div >
                 <span className="text text_type_digits-large">{orderId}</span>
             </div>
