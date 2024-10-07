@@ -1,0 +1,19 @@
+.type_container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    align-items: start;
+    gap: 24px;
+    margin: 40px 0px;
+    min-width: 580px;
+    min-height: 200px;
+}
+
+.type {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: stretch;
+}

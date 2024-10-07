@@ -28,15 +28,6 @@
 /*second block*/
 .nav_second_block {
     composes: flex_container;
-    justify-content: end;
-
     flex-grow: 9;
-}
-
-
-/*nav item*/
-
-.nav_item {
-    composes: flex_container;
-    gap: 8px;
+    justify-content: end;
 }

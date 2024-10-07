@@ -1,7 +1,6 @@
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import React from 'react'
-import ingredientModule from "./Ingredient.module.css"
-import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
+import ingredientModule from "./ingredient.module.css"
+import { IngredientType } from "../../../../utils/type"
 
 export default function Ingredient({ ingredient }) {
     return (
@@ -14,4 +13,8 @@ export default function Ingredient({ ingredient }) {
             <span className="text text_type_main-default">{ingredient.name}</span>
         </div>
     )
+}
+
+Ingredient.propTypes = {
+    ingredient: IngredientType.isRequired
 }

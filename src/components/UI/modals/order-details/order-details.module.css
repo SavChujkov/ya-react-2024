@@ -1,0 +1,39 @@
+.flex_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.order_details {
+    composes: flex_container;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    gap: 16px;
+    margin: 50px 10px 120px 10px;
+}
+
+.close_modal {
+    composes: flex_container;
+    width: 90%;
+    height: 40px;
+    justify-content: end;
+
+}
+
+.order_message {
+    text-align: center;
+}
+
+.order_name {
+    margin: 30px 0px 0px 0px;
+}
+
+.state_icon {
+    margin: 60px auto 60px auto;
+}
+
+.close_icon {
+    cursor: pointer;
+}
