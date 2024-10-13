@@ -9,6 +9,7 @@
     align-items: center;
     width: 250px;
     text-align: center;
+    position: relative;
 }
 
 .price_details {

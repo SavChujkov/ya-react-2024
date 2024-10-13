@@ -4,8 +4,18 @@ import classNames from 'classnames';
 import IngredientList from './ingredient-list/ingredient-list';
 import PropTypes from 'prop-types';
 import { IngredientType } from "../../../utils/type"
+import { useSelector } from "react-redux";
+import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
+export default function BurgerIngredients() {
+    const { isLoading, isError } = useSelector(state => {
+        return {
+            isLoading: state.ingredients.ingridientsFetching,
+            isError: state.ingredients.ingridientsFailedFetching
+        }
 
-export default function BurgerIngredients({ ingredientsList, isError, isLoading }) {
+    }
+    )
+
     return (
         <section className={burgerIngredientsModule.section_block}>
             <h1 className={classNames(burgerIngredientsModule.header,
@@ -23,8 +33,8 @@ export default function BurgerIngredients({ ingredientsList, isError, isLoading 
                     isError ? (<p>Красивая анимация ошибки</p>) :
                         (
                             <div className={burgerIngredientsModule.type_list}>
-                                <IngredientList name="Булки" type={"bun"} ingredientsList={ingredientsList} />
-                                <IngredientList name="Соусы" type={"sauce"} ingredientsList={ingredientsList} />
+                                <IngredientList name="Булки" type={"bun"} />
+                                <IngredientList name="Соусы" type={"sauce"} />
                             </div>
                         )
             }
@@ -34,7 +44,5 @@ export default function BurgerIngredients({ ingredientsList, isError, isLoading 
 }
 
 BurgerIngredients.propTypes = {
-    ingredientsList: PropTypes.arrayOf(IngredientType).isRequired,
-    isError: PropTypes.bool.isRequired,
-    isLoading: PropTypes.bool.isRequired,
+
 }

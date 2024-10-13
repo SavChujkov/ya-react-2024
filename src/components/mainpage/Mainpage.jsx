@@ -7,29 +7,26 @@ import BurgerIngredients from '../UI/burger-ingredients/burger-ingredients'
 import AppHeader from '../UI/header-ingredients/app-header'
 import mainpage from "./mainpage.module.css"
 import PropTypes from 'prop-types';
-import { IngredientType } from "../../utils/type"
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { DndProvider } from "react-dnd";
 
-export default function Mainpage({ ingredientsData, isError, isLoading }) {
+export default function Mainpage() {
 
     return (
         <>
             <AppHeader />
             <main className="container">
-                <section className={mainpage.burger_creator}>
-                    <BurgerIngredients isError={isError}
-                        isLoading={isLoading}
-                        ingredientsList={ingredientsData} />
-                    <BurgerConstructor isError={isError}
-                        isLoading={isLoading}
-                        ingredientsList={ingredientsData} />
-                </section>
+                <DndProvider backend={HTML5Backend}>
+                    <section className={mainpage.burger_creator}>
+                        <BurgerIngredients />
+                        <BurgerConstructor />
+                    </section>
+                </DndProvider>
             </main>
         </>
     )
 }
 
 Mainpage.propTypes = {
-    ingredientsData: PropTypes.arrayOf(IngredientType).isRequired,
-    isError: PropTypes.bool.isRequired,
-    isLoading: PropTypes.bool.isRequired,
+
 }

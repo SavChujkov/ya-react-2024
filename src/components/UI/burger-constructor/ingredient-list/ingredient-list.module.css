@@ -17,5 +17,7 @@
 
 .ingredients_container {
     composes: flex_container;
+    min-width: 550px;
+    min-height: 200px;
     height: 680px;
 }

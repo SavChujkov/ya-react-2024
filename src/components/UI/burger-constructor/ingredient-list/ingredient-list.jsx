@@ -5,46 +5,75 @@ import PropTypes from 'prop-types';
 import { IngredientType } from "../../../../utils/type"
 import IngredientDetails from '../../modals/ingredient-details/ingredient-details';
 import Modal from '../../modals/modals-templates/modal/modal';
-export default function IngredientList({ ingredientsList }) {
+import { useSelector, useDispatch } from 'react-redux';
+import { useDrop } from 'react-dnd';
+import {
+    SET_CHOOSEN_INGREDIENT,
+    SET_CHOOSEN_BUN
+} from '../../../../services/actions/burget-constructor';
+import { v4 as uuidv4 } from 'uuid';
+
+export default function IngredientList() {
+
+    const ingredientsList = useSelector(state => state.choosenIngredients.choosenIngridientsList)
+    const selectedBunRedux = useSelector(state => state.choosenIngredients.choosenBun)
+    const countIngredients = useSelector(state => state.choosenIngredients.countChoosenIngredients)
+
+    console.log(ingredientsList, "picked ingredients")
+
+    //console.log(ingredientsList, " this is my list")
+    //console.log(Object.keys(ingredientsList))
+    const dispatch = useDispatch()
 
     const [selectedData, setSeletedData] = React.useState(null)
     const [showModal, setShowModal] = React.useState(false)
 
-    //пока захардкожено
-    const selectedBun = {
-        "_id": "643d69a5c3f7b9001cfa093c",
-        "name": "Краторная булка N-200i",
-        "type": "bun",
-        "proteins": 80,
-        "fat": 24,
-        "carbohydrates": 53,
-        "calories": 420,
-        "price": 1255,
-        "image": "https://code.s3.yandex.net/react/code/bun-02.png",
-        "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
-        "image_large": "https://code.s3.yandex.net/react/code/bun-02-large.png",
-        "__v": 0
+    const addBun = (ingredient) => {
+        dispatch({ type: SET_CHOOSEN_BUN, ingredient: ingredient })
     }
+    const addIngredient = (ingredient) => {
+        dispatch({ type: SET_CHOOSEN_INGREDIENT, ingredient: ingredient, uuid: uuidv4() })
+    }
+
+
+
+    const [{ isHover }, dropTarget] = useDrop({
+        accept: "ingredient",
+        collect: monitor => ({
+            isHover: monitor.isOver()
+        }),
+        drop(ingredient) {
+            ingredient.type === "bun" ? addBun(ingredient) : addIngredient(ingredient)
+        },
+    });
+
 
     const displayIngredientSummary = () => {
         setShowModal(!showModal)
     }
 
     return (
-        <div className={ingredientlistModule.ingredients_container}>
-            <DragElement style={{ marign: "0px 32px" }} ingredientData={selectedBun}
-                toggleShowModal={displayIngredientSummary}
-                setSelectedData={setSeletedData} type="top" />
+        <div ref={dropTarget} className={ingredientlistModule.ingredients_container}>
+            {Object.keys(selectedBunRedux).length > 0
+                ?
+                <DragElement style={{ marign: "0px 32px" }} ingredientData={selectedBunRedux}
+                    toggleShowModal={displayIngredientSummary}
+                    setSelectedData={setSeletedData} type="top" />
+                :
+                null
+            }
+
             <div
                 className={ingredientlistModule.ingredients_list}>
 
                 {
                     ingredientsList.map(function (item, index) {
-                        if (item.type == "main") {
-                            return <DragElement ingredientData={item}
-                                toggleShowModal={displayIngredientSummary}
-                                setSelectedData={setSeletedData} type="main" key={item._id} />
-                        }
+                        const ingredient = item.ingredient
+                        const uuid = item.uuid
+                        return <DragElement ingredientData={ingredient} uuid={uuid}
+                            toggleShowModal={displayIngredientSummary}
+                            setSelectedData={setSeletedData} type="main" key={uuid} />
+
                     })
                 }
                 {showModal ?
@@ -54,9 +83,15 @@ export default function IngredientList({ ingredientsList }) {
                     : null
                 }
             </div>
-            <DragElement ingredientData={selectedBun}
-                toggleShowModal={displayIngredientSummary}
-                setSelectedData={setSeletedData} type="bottom" />
+            {Object.keys(selectedBunRedux).length > 0
+                ?
+                <DragElement style={{ marign: "0px 32px" }} ingredientData={selectedBunRedux}
+                    toggleShowModal={displayIngredientSummary}
+                    setSelectedData={setSeletedData} type="bottom" />
+                :
+                null
+            }
+
         </div>
 
 
@@ -64,5 +99,4 @@ export default function IngredientList({ ingredientsList }) {
 }
 
 IngredientList.propTypes = {
-    ingredientsList: PropTypes.arrayOf(IngredientType).isRequired
 }

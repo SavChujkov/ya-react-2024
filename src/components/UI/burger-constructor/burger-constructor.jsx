@@ -7,16 +7,14 @@ import PropTypes from 'prop-types';
 import { IngredientType } from "../../../utils/type"
 import ModalOverlay from '../modals/modals-templates/modal-overlay/modal-overlay'
 import FormOrder from './forming-order/forming-order';
-export default function BurgerConstructor({ ingredientsList, isError, isLoading }) {
 
+import { useDispatch, useSelector } from 'react-redux';
+
+export default function BurgerConstructor() {
     return (
         <section className={burgerConstructorModule.section_block}>
             <div className={burgerConstructorModule.ingredients_container}>
-                {
-                    isLoading ? (<p>Красивая анимация загрузки</p>) :
-                        isError ? (<p>Красивая анимация ошибки</p>) :
-                            (<IngredientList ingredientsList={ingredientsList} />)
-                }
+                <IngredientList />
             </div>
             {/* когда будет функционал оформления заказа, можно вынести в компонент */}
             <div className={burgerConstructorModule.make_order}>
@@ -32,7 +30,5 @@ export default function BurgerConstructor({ ingredientsList, isError, isLoading 
 }
 
 BurgerConstructor.propTypes = {
-    ingredientsList: PropTypes.arrayOf(IngredientType).isRequired,
-    isError: PropTypes.bool.isRequired,
-    isLoading: PropTypes.bool.isRequired,
+
 }
