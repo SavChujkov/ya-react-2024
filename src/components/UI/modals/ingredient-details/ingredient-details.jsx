@@ -2,10 +2,11 @@ import React from 'react'
 import ingredientDetailsModule from "./ingredient-detalis.module.css"
 import PropTypes from 'prop-types';
 import { IngredientType } from "../../../../utils/type"
+import { useSelector } from 'react-redux';
 
-export default function IngredientDetails({ toggleDisplay, ingredientData }) {
-    const ingredients = ingredientData
-
+export default function IngredientDetails() {
+    //const ingredients = ingredientData
+    const ingredients = useSelector(state => state.ingredientDetail.ingredientDetail)
     return (
         <div className={ingredientDetailsModule.ingredient_details}>
             <div className={ingredientDetailsModule.image_container}>
@@ -43,6 +44,4 @@ export default function IngredientDetails({ toggleDisplay, ingredientData }) {
 }
 
 IngredientDetails.propTypes = {
-    toggleDisplay: PropTypes.func.isRequired,
-    ingredientData: IngredientType
 }

@@ -15,7 +15,7 @@ export default function BurgerIngredients() {
 
     }
     )
-
+    //
     return (
         <section className={burgerIngredientsModule.section_block}>
             <h1 className={classNames(burgerIngredientsModule.header,
@@ -35,6 +35,10 @@ export default function BurgerIngredients() {
                             <div className={burgerIngredientsModule.type_list}>
                                 <IngredientList name="Булки" type={"bun"} />
                                 <IngredientList name="Соусы" type={"sauce"} />
+
+                                <IngredientList name="Начинки" type={"main"} />
+
+
                             </div>
                         )
             }

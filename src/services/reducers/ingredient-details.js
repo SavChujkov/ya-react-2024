@@ -4,18 +4,25 @@ import {
 } from "../actions/ingredient-details";
 
 
-const initialState = {}
+const initialState = {
+    ingredientDetail: null
+}
 
 export const ingredientDetailReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case SHOW_INGREDIENT_DETAILS:
             return {
-                ...action.ingredientDetail
+                ...state,
+                ingredientDetail: action.ingredientDetail
             }
 
         case FLUSH_INGREDIENT_DETAILS:
-            return {}
+            return {
+                ...state,
+                ingredientDetail: null
+            }
+
 
         default:
             return state;

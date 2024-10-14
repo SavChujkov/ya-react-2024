@@ -49,7 +49,7 @@ export const ingridientReducer = (state = initialState, action) => {
 export const rootReducer = combineReducers({
     ingredients: ingridientReducer,
     choosenIngredients: choosenIngredientsReducer,
-    ingreidentDetail: ingredientDetailReducer,
+    ingredientDetail: ingredientDetailReducer,
     orderDetail: orderDetailReducer
 
 });

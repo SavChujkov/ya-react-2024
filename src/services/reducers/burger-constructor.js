@@ -2,7 +2,8 @@ import {
     SET_CHOOSEN_INGREDIENT,
     DELETE_CHOOSEN_INGREDIENT,
     SET_CHOOSEN_BUN,
-    DELETE_CHOOSEN_BUN
+    DELETE_CHOOSEN_BUN,
+    MUTATE_INGREDIENTS
 } from "../actions/burget-constructor"
 
 import { v4 as uuidv4 } from 'uuid';
@@ -25,6 +26,13 @@ const initialState = {
 
 export const choosenIngredientsReducer = (state = initialState, action) => {
     switch (action.type) {
+
+        case MUTATE_INGREDIENTS:
+            return {
+                ...state,
+                choosenIngridientsList: action.mutatedArray
+            }
+
         case SET_CHOOSEN_INGREDIENT:
             return {
                 ...state,
@@ -39,19 +47,23 @@ export const choosenIngredientsReducer = (state = initialState, action) => {
             }
 
         case DELETE_CHOOSEN_INGREDIENT:
+            const test = state.choosenIngridientsList
+                .filter(item =>
+                    item.uuid != action.uuid
+                )
 
+            console.log(test, "filtration test")
             return {
                 ...state,
-                choosenIngridientsList: [...state.choosenIngridientsList
+                choosenIngridientsList: state.choosenIngridientsList
                     .filter(item => {
                         if (item.uuid === action.uuid) {
+                            console.log(item, "item")
                             console.log("match for", item.uuid, action.uuid)
                         }
-                        return item.uuid == action.uuid
-                    }
-
-                    )
-                ],
+                        return item.uuid != action.uuid
+                    })
+                ,
                 countChoosenIngredients:
                 {
                     ...state.countChoosenIngredients,

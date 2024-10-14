@@ -7,10 +7,15 @@ import IngredientDetails from '../../modals/ingredient-details/ingredient-detail
 import Modal from '../../modals/modals-templates/modal/modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
+import { useCallback } from 'react';
+import update from 'immutability-helper'
 import {
     SET_CHOOSEN_INGREDIENT,
-    SET_CHOOSEN_BUN
+    SET_CHOOSEN_BUN,
+    MUTATE_INGREDIENTS
 } from '../../../../services/actions/burget-constructor';
+
+import { FLUSH_INGREDIENT_DETAILS } from '../../../../services/actions/ingredient-details';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function IngredientList() {
@@ -25,7 +30,6 @@ export default function IngredientList() {
     //console.log(Object.keys(ingredientsList))
     const dispatch = useDispatch()
 
-    const [selectedData, setSeletedData] = React.useState(null)
     const [showModal, setShowModal] = React.useState(false)
 
     const addBun = (ingredient) => {
@@ -35,7 +39,17 @@ export default function IngredientList() {
         dispatch({ type: SET_CHOOSEN_INGREDIENT, ingredient: ingredient, uuid: uuidv4() })
     }
 
-
+    const moveCard = (dragIndex, hoverIndex) => {
+        dispatch({
+            type: MUTATE_INGREDIENTS, mutatedArray:
+                update(ingredientsList, {
+                    $splice: [
+                        [dragIndex, 1],
+                        [hoverIndex, 0, ingredientsList[dragIndex]],
+                    ],
+                })
+        })
+    }
 
     const [{ isHover }, dropTarget] = useDrop({
         accept: "ingredient",
@@ -49,6 +63,9 @@ export default function IngredientList() {
 
 
     const displayIngredientSummary = () => {
+        if (showModal) {
+            dispatch({ type: FLUSH_INGREDIENT_DETAILS })
+        }
         setShowModal(!showModal)
     }
 
@@ -58,7 +75,7 @@ export default function IngredientList() {
                 ?
                 <DragElement style={{ marign: "0px 32px" }} ingredientData={selectedBunRedux}
                     toggleShowModal={displayIngredientSummary}
-                    setSelectedData={setSeletedData} type="top" />
+                    type="top" />
                 :
                 null
             }
@@ -70,15 +87,16 @@ export default function IngredientList() {
                     ingredientsList.map(function (item, index) {
                         const ingredient = item.ingredient
                         const uuid = item.uuid
-                        return <DragElement ingredientData={ingredient} uuid={uuid}
+                        return <DragElement ingredientData={ingredient} uuid={uuid} index_in_array={index}
+                            moveCard={moveCard}
                             toggleShowModal={displayIngredientSummary}
-                            setSelectedData={setSeletedData} type="main" key={uuid} />
+                            type="main" key={uuid} />
 
                     })
                 }
                 {showModal ?
                     <Modal modalHead="Детали ингредиента" toggleDisplay={displayIngredientSummary}>
-                        <IngredientDetails toggleDisplay={displayIngredientSummary} ingredientData={selectedData} />
+                        <IngredientDetails toggleDisplay={displayIngredientSummary} />
                     </Modal>
                     : null
                 }
@@ -86,8 +104,7 @@ export default function IngredientList() {
             {Object.keys(selectedBunRedux).length > 0
                 ?
                 <DragElement style={{ marign: "0px 32px" }} ingredientData={selectedBunRedux}
-                    toggleShowModal={displayIngredientSummary}
-                    setSelectedData={setSeletedData} type="bottom" />
+                    toggleShowModal={displayIngredientSummary} type="bottom" />
                 :
                 null
             }

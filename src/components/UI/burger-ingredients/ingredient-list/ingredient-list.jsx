@@ -28,5 +28,5 @@ export default function IngredientList({ name, type }) {
 
 IngredientList.propTypes = {
     name: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(['bun', 'sauce']).isRequired,
+    type: PropTypes.oneOf(['bun', 'sauce', 'main']).isRequired,
 }
