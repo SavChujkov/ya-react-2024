@@ -1,0 +1,33 @@
+.flex_container {
+    display: flex;
+    align-items: center;
+}
+
+.section_block {
+    composes: flex_container;
+    flex-direction: column;
+    align-items: end;
+
+    padding: 100px 0px 40px 16px;
+    width: 600px;
+}
+
+
+.make_order {
+    composes: flex_container;
+    flex-direction: row;
+    gap: 48px;
+
+}
+
+.price_summary {
+    composes: flex_container;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.ingredients_container {
+    composes: flex_container;
+    height: 680px;
+    margin: 0px 0px 40px 16px;
+}

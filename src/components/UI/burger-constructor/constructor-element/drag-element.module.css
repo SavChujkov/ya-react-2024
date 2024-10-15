@@ -1,0 +1,20 @@
+.flex_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.drag_element {
+    composes: flex_container;
+    gap: 8px;
+}
+
+.closing_element {
+    composes: flex_container;
+    margin: 0px 16px;
+}

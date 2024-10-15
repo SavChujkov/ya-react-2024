@@ -1,0 +1,33 @@
+.flex_container {
+    display: flex;
+    align-items: center;
+}
+
+.burger_header {
+    background-color: #1C1C21;
+}
+
+.nav_flex {
+    composes: flex_container;
+    padding: 16px 0px;
+}
+
+
+/*first block*/
+.nav_first_block {
+    composes: flex_container;
+    flex-grow: 4;
+    justify-content: space-between;
+}
+
+.nav_actions {
+    composes: flex_container;
+    gap: 48px;
+}
+
+/*second block*/
+.nav_second_block {
+    composes: flex_container;
+    flex-grow: 9;
+    justify-content: end;
+}

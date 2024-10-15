@@ -1,0 +1,23 @@
+.flex_container {
+    display: flex;
+    align-items: center;
+    align-items: start;
+    flex-direction: column;
+    align-items: end;
+
+
+}
+
+.ingredients_list {
+    composes: flex_container;
+    gap: 16px;
+    overflow-y: scroll;
+    margin: 16px 0px 16px 0px;
+}
+
+.ingredients_container {
+    composes: flex_container;
+    min-width: 550px;
+    min-height: 200px;
+    height: 680px;
+}
