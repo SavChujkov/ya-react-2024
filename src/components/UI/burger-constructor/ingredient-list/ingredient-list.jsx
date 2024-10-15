@@ -10,8 +10,8 @@ import { useDrop } from 'react-dnd';
 import { useCallback } from 'react';
 import update from 'immutability-helper'
 import {
-    SET_CHOOSEN_INGREDIENT,
-    SET_CHOOSEN_BUN,
+    SET_CHOSEN_INGREDIENT,
+    SET_CHOSEN_BUN,
     MUTATE_INGREDIENTS
 } from '../../../../services/actions/burget-constructor';
 
@@ -20,23 +20,18 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function IngredientList() {
 
-    const ingredientsList = useSelector(state => state.choosenIngredients.choosenIngridientsList)
-    const selectedBunRedux = useSelector(state => state.choosenIngredients.choosenBun)
-    const countIngredients = useSelector(state => state.choosenIngredients.countChoosenIngredients)
+    const ingredientsList = useSelector(state => state.chosenIngredients.chosenIngridientsList)
+    const selectedBunRedux = useSelector(state => state.chosenIngredients.chosenBun)
 
-    console.log(ingredientsList, "picked ingredients")
-
-    //console.log(ingredientsList, " this is my list")
-    //console.log(Object.keys(ingredientsList))
     const dispatch = useDispatch()
 
     const [showModal, setShowModal] = React.useState(false)
 
     const addBun = (ingredient) => {
-        dispatch({ type: SET_CHOOSEN_BUN, ingredient: ingredient })
+        dispatch({ type: SET_CHOSEN_BUN, ingredient: ingredient })
     }
     const addIngredient = (ingredient) => {
-        dispatch({ type: SET_CHOOSEN_INGREDIENT, ingredient: ingredient, uuid: uuidv4() })
+        dispatch({ type: SET_CHOSEN_INGREDIENT, ingredient: ingredient, uuid: uuidv4() })
     }
 
     const moveCard = (dragIndex, hoverIndex) => {
@@ -51,11 +46,9 @@ export default function IngredientList() {
         })
     }
 
-    const [{ isHover }, dropTarget] = useDrop({
+    const [, dropTarget] = useDrop({
         accept: "ingredient",
-        collect: monitor => ({
-            isHover: monitor.isOver()
-        }),
+
         drop(ingredient) {
             ingredient.type === "bun" ? addBun(ingredient) : addIngredient(ingredient)
         },
@@ -87,10 +80,10 @@ export default function IngredientList() {
                     ingredientsList.map(function (item, index) {
                         const ingredient = item.ingredient
                         const uuid = item.uuid
-                        return <DragElement ingredientData={ingredient} uuid={uuid} index_in_array={index}
+                        return (<DragElement ingredientData={ingredient} uuid={uuid} indexInArray={index}
                             moveCard={moveCard}
                             toggleShowModal={displayIngredientSummary}
-                            type="main" key={uuid} />
+                            type="main" key={uuid} />)
 
                     })
                 }

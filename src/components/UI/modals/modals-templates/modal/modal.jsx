@@ -13,7 +13,6 @@ export default function Modal({ children, toggleDisplay, modalHead }) {
 
     const handleCloseOnEsc = useCallback((event) => {
         if (event.code === "Escape") {
-            console.log("toggle pressed")
             toggleDisplay()
         }
     })

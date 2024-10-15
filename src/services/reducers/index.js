@@ -5,7 +5,7 @@ import {
 } from "../actions";
 
 import { combineReducers } from 'redux';
-import { choosenIngredientsReducer } from "./burger-constructor";
+import { chosenIngredientsReducer } from "./burger-constructor";
 import { ingredientDetailReducer } from "./ingredient-details";
 import { orderDetailReducer } from "./order-details";
 
@@ -48,12 +48,8 @@ export const ingridientReducer = (state = initialState, action) => {
 
 export const rootReducer = combineReducers({
     ingredients: ingridientReducer,
-    choosenIngredients: choosenIngredientsReducer,
+    chosenIngredients: chosenIngredientsReducer,
     ingredientDetail: ingredientDetailReducer,
     orderDetail: orderDetailReducer
 
 });
-
-//choosenIngredients: choosenIngredientsReducer,
-//    ingreidentDetail: ingredientDetailReducer,
-//       orderDetail: orderDetailReducer

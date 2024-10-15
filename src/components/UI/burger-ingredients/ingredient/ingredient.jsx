@@ -7,15 +7,15 @@ import { useSelector } from 'react-redux';
 
 export default function Ingredient({ ingredient }) {
 
-    const choosenIngredientsCount = useSelector(state => (state.choosenIngredients.countChoosenIngredients))
-    const choosenBun = useSelector(state => (state.choosenIngredients.choosenBun))
-    const choosenBunCount = useSelector(state => (state.choosenIngredients.choosenBunCount))
+    const chosenIngredientsCount = useSelector(state => (state.chosenIngredients.countChosenIngredients))
+    const chosenBun = useSelector(state => (state.chosenIngredients.chosenBun))
+    const chosenBunCount = useSelector(state => (state.chosenIngredients.chosenBunCount))
 
 
     //если тип булка подставляем кол-во булок, иначе кол-во ингридиента
-    const amountInConstructor = (ingredient.type === "bun" && choosenBun._id == ingredient._id) ?
-        choosenBunCount :
-        choosenIngredientsCount[ingredient._id]
+    const amountInConstructor = (ingredient.type === "bun" && chosenBun._id == ingredient._id) ?
+        chosenBunCount :
+        chosenIngredientsCount[ingredient._id]
 
 
 

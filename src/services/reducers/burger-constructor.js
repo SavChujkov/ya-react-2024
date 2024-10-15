@@ -1,8 +1,8 @@
 import {
-    SET_CHOOSEN_INGREDIENT,
-    DELETE_CHOOSEN_INGREDIENT,
-    SET_CHOOSEN_BUN,
-    DELETE_CHOOSEN_BUN,
+    SET_CHOSEN_INGREDIENT,
+    DELETE_CHOSEN_INGREDIENT,
+    SET_CHOSEN_BUN,
+    DELETE_CHOSEN_BUN,
     MUTATE_INGREDIENTS
 } from "../actions/burget-constructor"
 
@@ -10,10 +10,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 const initialState = {
-    choosenIngridientsList: [],
-    countChoosenIngredients: {},
-    choosenBun: {}, //ingredient obj
-    choosenBunCount: 0, //2,0
+    chosenIngridientsList: [],
+    countChosenIngredients: {},
+    chosenBun: {}, //ingredient obj
+    chosenBunCount: 0, //2,0
 }
 
 //const li = [
@@ -24,65 +24,62 @@ const initialState = {
 //    _id1:5
 //}
 
-export const choosenIngredientsReducer = (state = initialState, action) => {
+export const chosenIngredientsReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case MUTATE_INGREDIENTS:
             return {
                 ...state,
-                choosenIngridientsList: action.mutatedArray
+                chosenIngridientsList: action.mutatedArray
             }
 
-        case SET_CHOOSEN_INGREDIENT:
+        case SET_CHOSEN_INGREDIENT:
             return {
                 ...state,
-                choosenIngridientsList: [...state.choosenIngridientsList, { uuid: action.uuid, ingredient: action.ingredient }],
-                countChoosenIngredients: {
-                    ...state.countChoosenIngredients,
-                    [action.ingredient._id]: (!state.countChoosenIngredients.hasOwnProperty(action.ingredient._id)
-                        || state.countChoosenIngredients[action.ingredient._id] == 0)
+                chosenIngridientsList: [...state.chosenIngridientsList, { uuid: action.uuid, ingredient: action.ingredient }],
+                countChosenIngredients: {
+                    ...state.countChosenIngredients,
+                    [action.ingredient._id]: (!state.countChosenIngredients.hasOwnProperty(action.ingredient._id)
+                        || state.countChosenIngredients[action.ingredient._id] == 0)
                         ? 1
-                        : state.countChoosenIngredients[action.ingredient._id] + 1
+                        : state.countChosenIngredients[action.ingredient._id] + 1
                 }
             }
 
-        case DELETE_CHOOSEN_INGREDIENT:
-            const test = state.choosenIngridientsList
+        case DELETE_CHOSEN_INGREDIENT:
+            const test = state.chosenIngridientsList
                 .filter(item =>
                     item.uuid != action.uuid
                 )
 
-            console.log(test, "filtration test")
             return {
                 ...state,
-                choosenIngridientsList: state.choosenIngridientsList
+                chosenIngridientsList: state.chosenIngridientsList
                     .filter(item => {
                         if (item.uuid === action.uuid) {
-                            console.log(item, "item")
-                            console.log("match for", item.uuid, action.uuid)
                         }
                         return item.uuid != action.uuid
                     })
                 ,
-                countChoosenIngredients:
+                countChosenIngredients:
                 {
-                    ...state.countChoosenIngredients,
-                    [action.ingredient._id]: state.countChoosenIngredients[action.ingredient._id] - 1
+                    ...state.countChosenIngredients,
+                    [action.ingredient._id]: state.countChosenIngredients[action.ingredient._id] - 1
                 }
             }
 
-        case SET_CHOOSEN_BUN:
+        case SET_CHOSEN_BUN:
             return {
                 ...state,
-                choosenBun: action.ingredient,
-                choosenBunCount: 2
+                chosenBun: action.ingredient,
+                chosenBunCount: 2
             }
 
-        case DELETE_CHOOSEN_BUN:
+        case DELETE_CHOSEN_BUN:
             return {
                 ...state,
-                choosenBun: {},
-                choosenBunCount: 0
+                chosenBun: {},
+                chosenBunCount: 0
             }
 
         default:

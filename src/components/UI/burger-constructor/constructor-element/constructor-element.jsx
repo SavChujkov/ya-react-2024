@@ -9,8 +9,8 @@ import { useSelector } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 import { useRef } from 'react';
 import {
-    DELETE_CHOOSEN_INGREDIENT,
-    DELETE_CHOOSEN_BUN
+    DELETE_CHOSEN_INGREDIENT,
+    DELETE_CHOSEN_BUN
 }
     from '../../../../services/actions/burget-constructor';
 
@@ -20,7 +20,7 @@ import {
 }
     from '../../../../services/actions/ingredient-details';
 
-export default function DragElement({ ingredientData, type, setSelectedData, toggleShowModal, uuid, index_in_array, moveCard }) {
+export default function DragElement({ ingredientData, type, setSelectedData, toggleShowModal, uuid, indexInArray, moveCard }) {
 
 
     const dispatch = useDispatch()
@@ -33,7 +33,7 @@ export default function DragElement({ ingredientData, type, setSelectedData, tog
         event.stopPropagation()
         event.preventDefault()
         dispatch({
-            type: DELETE_CHOOSEN_INGREDIENT,
+            type: DELETE_CHOSEN_INGREDIENT,
             ingredient: ingredientData,
             uuid: uuid
         })
@@ -53,8 +53,8 @@ export default function DragElement({ ingredientData, type, setSelectedData, tog
             if (!ref.current) {
                 return
             }
-            const dragIndex = item.index_in_array
-            const hoverIndex = index_in_array
+            const dragIndex = item.indexInArray
+            const hoverIndex = indexInArray
 
             // Don't replace items with themselves
             if (dragIndex === hoverIndex) {
@@ -87,14 +87,14 @@ export default function DragElement({ ingredientData, type, setSelectedData, tog
             // Generally it's better to avoid mutations,
             // but it's good here for the sake of performance
             // to avoid expensive index searches.
-            item.index_in_array = hoverIndex
+            item.indexInArray = hoverIndex
         },
     })
 
     const [{ isDragging }, drag] = useDrag({
         type: "constructor-element",
         item: () => {
-            return { uuid, index_in_array }
+            return { uuid, indexInArray }
         },
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
@@ -104,16 +104,27 @@ export default function DragElement({ ingredientData, type, setSelectedData, tog
     const opacity = isDragging ? 0 : 1
     drag(drop(ref))
 
+    const setInnerText = (ingredientData) => {
+        if (type == "main") {
+            return ingredientData.name
+        }
+        else if (type == "top") {
+            return `${ingredientData.name}\n(верх)`
+        }
+        else if (type == "bottom") {
+            return `${ingredientData.name}\n(низ)`
+        }
+        else {
+            return ingredientData.name
+        }
+    }
+
     return (
         <div ref={ingredientData.type != "bun" ? ref : null} style={{ opacity: opacity }} data-handler-id={handlerId} className={type == "main" ? dragElementModule.drag_element : dragElementModule.closing_element}>
             {type == "main" ? <DragIcon /> : null}
             <div onClick={selectDragElement} style={{ width: "550px" }}>
                 <ConstructorElement
-                    text={type == "main" ? ingredientData.name :
-                        type == "top" ? `${ingredientData.name}\n(верх)` :
-                            type == "bottom" ? `${ingredientData.name}\n(низ)` :
-                                ingredientData.name
-                    }
+                    text={setInnerText(ingredientData)}
                     price={ingredientData.price}
                     thumbnail={ingredientData.image}
                     type={type}

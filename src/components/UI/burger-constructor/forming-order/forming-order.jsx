@@ -14,13 +14,13 @@ export default function FormOrder() {
     const apiUrl = "https://norma.nomoreparties.space/api/orders"
 
     const displayOrderSummary = () => {
-        dispatch({ type: FLUSH_ORDER_DETAILS })
+        if (showModal) dispatch({ type: FLUSH_ORDER_DETAILS })
         setShowModal(!showModal)
     }
 
     const dispatch = useDispatch()
-    const ingredientsList = useSelector(state => state.choosenIngredients.choosenIngridientsList)
-    const bun = useSelector(state => state.choosenIngredients.choosenBun)
+    const ingredientsList = useSelector(state => state.chosenIngredients.chosenIngridientsList)
+    const bun = useSelector(state => state.chosenIngredients.chosenBun)
 
     const formOrderSummary = () => {
         const ingredientsIds = ingredientsList.map((item) => {

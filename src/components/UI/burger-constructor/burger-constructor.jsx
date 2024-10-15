@@ -13,8 +13,8 @@ import { useMemo, useState } from 'react';
 export default function BurgerConstructor() {
 
 
-    const ingredientsList = useSelector(state => state.choosenIngredients.choosenIngridientsList)
-    const bun = useSelector(state => state.choosenIngredients.choosenBun)
+    const ingredientsList = useSelector(state => state.chosenIngredients.chosenIngridientsList)
+    const bun = useSelector(state => state.chosenIngredients.chosenBun)
 
 
     const totalCost = useMemo(() => {
